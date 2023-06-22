@@ -1,5 +1,6 @@
 using Blog.Data;
 using Blog.Models.EF;
+using Blog.Services;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddTransient<IPostService, PostService>();
 
 var app = builder.Build();
 
