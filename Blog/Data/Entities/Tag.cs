@@ -3,14 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Blog.Data.Entities
 {
-  public class Tag
-  {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int? TagId { get; set; }
-    public string? TagName { get; set; }
-    public string? TagSlug { get; set; }
-    public ICollection<Post>? Posts { get; set; }
+    public class Tag
+    {
+        [Key]
+        public string? TagSlug { get; set; }
+        public string? TagName { get; set; }
+        public ICollection<Post>? Posts { get; set; }
 
-  }
+    }
 }
