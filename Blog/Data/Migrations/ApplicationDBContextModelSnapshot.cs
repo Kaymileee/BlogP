@@ -61,16 +61,13 @@ namespace Blog.Data.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Attachment");
+                    b.ToTable("Attachments");
                 });
 
             modelBuilder.Entity("Blog.Data.Entities.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
@@ -78,7 +75,7 @@ namespace Blog.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Slug")
+                    b.Property<string>("ParentId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CategoryId");
@@ -160,8 +157,8 @@ namespace Blog.Data.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("PostId", "CategoryId");
 
@@ -170,18 +167,27 @@ namespace Blog.Data.Migrations
                     b.ToTable("PostCategories");
                 });
 
-            modelBuilder.Entity("Blog.Data.Entities.Tag", b =>
+            modelBuilder.Entity("Blog.Data.Entities.PostTag", b =>
                 {
-                    b.Property<int?>("TagId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("PostId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("TagId"));
+                    b.Property<string>("TagId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("PostId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("PostTags");
+                });
+
+            modelBuilder.Entity("Blog.Data.Entities.Tag", b =>
+                {
+                    b.Property<string>("TagId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TagName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TagSlug")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TagId");
@@ -216,42 +222,15 @@ namespace Blog.Data.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Role")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("CategoryPost", b =>
-                {
-                    b.Property<int>("CategoriesCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PostsPostId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoriesCategoryId", "PostsPostId");
-
-                    b.HasIndex("PostsPostId");
-
-                    b.ToTable("CategoryPost");
-                });
-
-            modelBuilder.Entity("PostTag", b =>
-                {
-                    b.Property<int>("PostsPostId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagsTagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PostsPostId", "TagsTagId");
-
-                    b.HasIndex("TagsTagId");
-
-                    b.ToTable("PostTag");
                 });
 
             modelBuilder.Entity("Blog.Data.Entities.Attachment", b =>
@@ -286,13 +265,13 @@ namespace Blog.Data.Migrations
             modelBuilder.Entity("Blog.Data.Entities.PostCategory", b =>
                 {
                     b.HasOne("Blog.Data.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("PostCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Blog.Data.Entities.Post", "Post")
-                        .WithMany()
+                        .WithMany("PostCategories")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -302,34 +281,28 @@ namespace Blog.Data.Migrations
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("CategoryPost", b =>
+            modelBuilder.Entity("Blog.Data.Entities.PostTag", b =>
                 {
-                    b.HasOne("Blog.Data.Entities.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesCategoryId")
+                    b.HasOne("Blog.Data.Entities.Post", "Post")
+                        .WithMany("PostTags")
+                        .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Blog.Data.Entities.Post", null)
-                        .WithMany()
-                        .HasForeignKey("PostsPostId")
+                    b.HasOne("Blog.Data.Entities.Tag", "Tag")
+                        .WithMany("PostTags")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("Tag");
                 });
 
-            modelBuilder.Entity("PostTag", b =>
+            modelBuilder.Entity("Blog.Data.Entities.Category", b =>
                 {
-                    b.HasOne("Blog.Data.Entities.Post", null)
-                        .WithMany()
-                        .HasForeignKey("PostsPostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Blog.Data.Entities.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsTagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("PostCategories");
                 });
 
             modelBuilder.Entity("Blog.Data.Entities.Post", b =>
@@ -337,6 +310,15 @@ namespace Blog.Data.Migrations
                     b.Navigation("Attachments");
 
                     b.Navigation("Comments");
+
+                    b.Navigation("PostCategories");
+
+                    b.Navigation("PostTags");
+                });
+
+            modelBuilder.Entity("Blog.Data.Entities.Tag", b =>
+                {
+                    b.Navigation("PostTags");
                 });
 
             modelBuilder.Entity("Blog.Data.Entities.User", b =>

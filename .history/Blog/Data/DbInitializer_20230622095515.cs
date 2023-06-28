@@ -82,7 +82,7 @@ namespace Blog.Data
       //             {
       //                 TagId = 1,
       //                 TagName = "Technology",
-      //                 TagSlug = "technology",
+      //                 TagId = "technology",
       //                 TagContent = "This tag is related to technology",
 
       //             },
@@ -90,7 +90,7 @@ namespace Blog.Data
       //             {
       //                 TagId = 2,
       //                 TagName = "Sports",
-      //                 TagSlug = "sports",
+      //                 TagId = "sports",
       //                 TagContent = "This tag is related to sports",
 
       //             }

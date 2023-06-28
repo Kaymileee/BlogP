@@ -9,7 +9,7 @@ namespace Blog.Data.Entities
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int? TagId { get; set; }
     public string? TagName { get; set; }
-    public string? TagSlug { get; set; }
+    public string? TagId { get; set; }
     public ICollection<Post>? Posts { get; set; }
 
   }

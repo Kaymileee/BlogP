@@ -78,14 +78,14 @@ namespace Blog.Data
                   {
                       TagId = 1,
                       TagName = "Technology",
-                      TagSlug = "technology",
+                      TagId = "technology",
 
                   },
                   new Tag
                   {
                       TagId = 2,
                       TagName = "Sports",
-                      TagSlug = "sports",
+                      TagId = "sports",
 
                   }
                    });

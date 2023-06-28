@@ -1,0 +1,61 @@
+﻿Id,Name,Parent
+1,Artificial intelligence (AI) and machine learning,
+2,Natural language processing (NLP),Artificial intelligence (AI) and machine learning
+3,Computer vision,Artificial intelligence (AI) and machine learning
+4,Robotics,Artificial intelligence (AI) and machine learning
+5,Deep learning,Artificial intelligence (AI) and machine learning
+6,Neural networks,Artificial intelligence (AI) and machine learning
+7,Blockchain technology,
+8,Cryptocurrency,Blockchain technology
+9,Smart contracts,Blockchain technology
+10,Decentralized applications (dApps),Blockchain technology
+11,Digital identity,Blockchain technology
+12,Supply chain management,Blockchain technology
+13,Cybersecurity and data privacy,Network security
+14,Network security,Network security
+15,Cloud security,Network security
+16,Encryption,Network security
+17,Authentication and access control,Network security
+18,Incident response,Network security
+19,Internet of Things (IoT),
+20,Connected devices,Internet of Things (IoT)
+21,Sensors and actuators,Internet of Things (IoT)
+22,Smart homes and cities,Internet of Things (IoT)
+23,Industrial IoT (IIoT),Internet of Things (IoT)
+24,Wearable technology,Internet of Things (IoT)
+25,Cloud computing and virtualization,
+26,Infrastructure as a Service (IaaS),Cloud computing and virtualization
+27,Platform as a Service (PaaS),Cloud computing and virtualization
+28,Software as a Service (SaaS),Cloud computing and virtualization
+29,Virtual machines (VMs),Cloud computing and virtualization
+30,Containerization,Cloud computing and virtualization
+31,Big data and data analytics,
+32,Data warehousing,Big data and data analytics
+33,Business intelligence (BI),Big data and data analytics
+34,Data mining,Big data and data analytics
+35,Predictive analytics,Big data and data analytics
+36,Data visualization,Big data and data analytics
+37,Augmented reality and virtual reality,
+38,Gaming and entertainment,Augmented reality and virtual reality
+39,Training and simulation,Augmented reality and virtual reality
+40,Healthcare and medicine,Augmented reality and virtual reality
+41,Retail and marketing,Augmented reality and virtual reality
+42,Education and training,Augmented reality and virtual reality
+43,Robotics and automation,
+44,Industrial robots,Robotics and automation
+45,Collaborative robots (cobots),Robotics and automation
+46,Autonomous vehicles (AVs),Robotics and automation
+47,Drones and unmanned aerial vehicles (UAVs),Robotics and automation
+48,Robotic process automation (RPA),Robotics and automation
+49,Quantum computing,
+50,Quantum mechanics,Quantum computing
+51,Quantum algorithms,Quantum computing
+52,Quantum cryptography,Quantum computing
+53,Quantum annealing,Quantum computing
+54,Quantum simulation,Quantum computing
+55,5G and wireless technology,
+56,Mobile networks,5G and wireless technology
+57,Internet connectivity,5G and wireless technology
+58,Wireless security,5G and wireless technology
+59,IoT connectivity,5G and wireless technology
+60,Cellular technology,5G and wireless technology
